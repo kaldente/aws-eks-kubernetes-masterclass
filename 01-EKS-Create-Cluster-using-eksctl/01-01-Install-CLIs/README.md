@@ -113,6 +113,18 @@ brew tap weaveworks/tap
 # Install the Weaveworks Homebrew tap.
 brew install weaveworks/tap/eksctl
 
+###############################################################################################################
+kaldente: this command above does not work on my Macbook.  But this command works `brew install eksctl`
+
+jkyung@jkyung-J93MVWN345 ~ % brew install weaveworks/tap/eksctl
+Warning: No available formula or cask with the name "weaveworks/tap/eksctl".
+==> Searching for similarly named formulae...
+Error: No similarly named formulae found.
+==> Searching for a previously deleted formula (in the last month)...
+Error: No previously deleted formula found.
+################################################################################################################
+
+
 # Verify eksctl version
 eksctl version
 ```
