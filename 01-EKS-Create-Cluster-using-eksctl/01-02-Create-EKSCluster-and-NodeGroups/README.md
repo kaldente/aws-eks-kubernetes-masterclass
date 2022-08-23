@@ -20,6 +20,15 @@ eksctl create cluster --name=eksdemo1 \
                       --region=us-east-1 \
                       --zones=us-east-1a,us-east-1b \
                       --without-nodegroup 
+                      
+########################################################################################
+jkyung@jkyung-J93MVWN345 ~ % eksctl create cluster --name=eksdemo1 \
+                      --region=us-east-1 \
+                      --zones=us-east-1a,us-east-1b \
+                      --without-nodegroup
+########################################################################################
+                      
+
 
 # Get List of clusters
 eksctl get cluster                  
@@ -44,12 +53,18 @@ eksctl utils associate-iam-oidc-provider \
     --approve
 ```
 
-
+################################################################################################
+eksctl utils associate-iam-oidc-provider --region us-east-1 --cluster=eksdemo1 --approve
+################################################################################################
 
 ## Step-03: Create EC2 Keypair
 - Create a new EC2 Keypair with name as `kube-demo`
 - This keypair we will use it when creating the EKS NodeGroup.
 - This will help us to login to the EKS Worker Nodes using Terminal.
+
+################################################################################################
+Google Drive/My Drive/Tech/AWS/AWS_EKS_Masterclass/kube-demo.pem
+################################################################################################
 
 ## Step-04: Create Node Group with additional Add-Ons in Public Subnets
 - These add-ons will create the respective IAM policies for us automatically within our Node Group role.
@@ -72,6 +87,25 @@ eksctl create nodegroup --cluster=eksdemo1 \
                         --appmesh-access \
                         --alb-ingress-access 
 ```
+
+###########################################################################################################
+jkyung@jkyung-J93MVWN345 aws_eks_masterclass % eksctl create nodegroup --cluster=eksdemo1 \
+                        --region=us-east-1 \
+                        --name=eksdemo1-ng-public1 \
+                        --node-type=t2.micro \
+                        --nodes=2 \
+                        --nodes-min=2 \
+                        --nodes-max=4 \
+                        --node-volume-size=20 \
+                        --ssh-access \
+                        --ssh-public-key=kube-demo \
+                        --managed \
+                        --asg-access \
+                        --external-dns-access \
+                        --full-ecr-access \
+                        --appmesh-access \
+                        --alb-ingress-access
+###########################################################################################################
 
 ## Step-05: Verify Cluster & Nodes
 
