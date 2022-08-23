@@ -127,6 +127,13 @@ eksctl get cluster
 # List NodeGroups in a cluster
 eksctl get nodegroup --cluster=<clusterName>
 
+########################################################################################################################################################
+jkyung@jkyung-J93MVWN345 aws_eks_masterclass % eksctl get nodegroups --cluster eksdemo1
+CLUSTER         NODEGROUP               STATUS  CREATED                 MIN SIZE        MAX SIZE        DESIRED CAPACITY        INSTANCE TYPE   IMAGE ID        ASG NAME                                                        TYPE
+eksdemo1        eksdemo1-ng-public1     ACTIVE  2022-08-23T16:51:02Z    2               4               2                       t2.micro        AL2_x86_64      eks-eksdemo1-ng-public1-4ec165ce-a882-60b4-48db-453456bdb50f    managed
+########################################################################################################################################################
+
+
 # List Nodes in current kubernetes cluster
 kubectl get nodes -o wide
 
