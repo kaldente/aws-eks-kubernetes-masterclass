@@ -137,6 +137,27 @@ eksdemo1        eksdemo1-ng-public1     ACTIVE  2022-08-23T16:51:02Z    2       
 # List Nodes in current kubernetes cluster
 kubectl get nodes -o wide
 
+############################################################################################################################################
+After installing kubctl `brew install kubectl`, I need to run `aws eks update-kubeconfig --name <cluster_name>` in order to connect to a EKS 
+cluster to view nodes.
+
+jkyung@jkyung-J93MVWN345 ~ % kubectl cluster-info
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+jkyung@jkyung-J93MVWN345 ~ % aws eks update-kubeconfig --name kubedemo1
+
+An error occurred (ResourceNotFoundException) when calling the DescribeCluster operation: No cluster found for name: kubedemo1.
+jkyung@jkyung-J93MVWN345 ~ % eksctl get cluster
+NAME		REGION		EKSCTL CREATED
+eksdemo1	us-east-1	True
+jkyung@jkyung-J93MVWN345 ~ % aws eks update-kubeconfig --name eksdemo1
+Added new context arn:aws:eks:us-east-1:728417853576:cluster/eksdemo1 to /Users/jkyung/.kube/config
+jkyung@jkyung-J93MVWN345 ~ % kubectl get nodes
+NAME                             STATUS   ROLES    AGE   VERSION
+ip-192-168-17-183.ec2.internal   Ready    <none>   24h   v1.23.9-eks-ba74326
+ip-192-168-39-183.ec2.internal   Ready    <none>   24h   v1.23.9-eks-ba74326
+###############################################################################################################################################
 # Our kubectl context should be automatically changed to new cluster
 kubectl config view --minify
 ```
@@ -152,6 +173,11 @@ kubectl config view --minify
 ### Verify CloudFormation Stacks
 - Verify Control Plane Stack & Events
 - Verify NodeGroup Stack & Events
+
+########################################################################################################################################################
+NAT gateway was created as part of EKS cluster creation (go Cloudformation > Resources).
+NAT Gateway is a highly available AWS managed service that makes it easy to connect to the Internet from instances within a private subnet in an Amazon Virtual Private Cloud (Amazon VPC)
+########################################################################################################################################################
 
 ### Login to Worker Node using Keypai kube-demo
 - Login to worker node
